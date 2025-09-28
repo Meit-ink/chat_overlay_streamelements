@@ -78,37 +78,50 @@ body{
 }
 
 .test-container{
-    /* position: relative; */
     width: 400px;
     height: 700px;
     border: 2px solid black;
     background-color: red;
+    z-index: -1;
 }
 
 .test-message-row{
     position: relative;
-    display: inline-block;
-    /* max-width: 400px; */
-    /* height: auto; */
-    /* border: black 2px solid; */
     background-color: black;
     color: white;
-    /* margin-left: 40px;
-    margin-right: 20px;
-    margin-top: 10px; */
     clip-path: polygon(0 5%, 100% 0, 95% 100%, 3% 100%);
 }
 
+.test-wrapper-wrapper{
+    position: relative;
+    max-width: 400px;
+    height: auto;
+    margin-left: 40px;
+    margin-right: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
 .test-tail{
-    /* content: ""; */
     position: absolute;
-    bottom: -25px;
-    left: -40px;
-    width: 50px;
+    bottom: -15px;
+    left: -30px;
+    width: 50px; /* plus petit */
     height: 50px;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 2;
+    background-color: black; /* couleur de la bulle */
     clip-path: polygon(0 100%, 42% 74%, 14% 46%, 100% 0, 100% 42%, 50% 56%, 67% 82%);
+    z-index: 2;
+}
+
+.test-tail-shadow{
+    position: absolute;
+    bottom: -15px;
+    left: -30px;
+    width: 50px; /* un peu plus grand que la queue */
+    height: 50px;
+    background-color: white; /* couleur du contour */
+    clip-path: polygon(0 100%, 25% 74%, 0% 40%, 100% 0, 100% 50%, 63% 60%, 73% 90%);
+    z-index: 0;
 }
 
 .test-message{
@@ -118,12 +131,8 @@ body{
 
 .test-wrapper{
     position: relative;
-    max-width: 400px;
-    height: auto;
-    margin-left: 40px;
-    margin-right: 20px;
-    margin-top: 10px;
     background-color:white;
     clip-path: polygon(0 5%, 100% 0, 95% 100%, 3% 100%);
-    padding: 0.5em 1em 0.3em 0.2em;
+    padding: 0.5em 1em 0.3em 0.4em;
+    z-index: 1
 }
