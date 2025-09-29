@@ -10,7 +10,7 @@
 <body>
     <div class="main-container"></div>
 
-    <div class="test-container">
+    <!-- <div class="test-container">
         <div class="test-wrapper-wrapper">
             <div class="test-username">S-Name</div>
             <div class="test-wrapper">
@@ -47,6 +47,40 @@
                     <div class="test-message test-event">Bidule_Machin vient tout juste de s'abonner !!</div>
                 </div>
             </div>
+        </div>
+    </div> -->
+    <div class="main-container">
+        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper {animationIn} animated ${data.badges[0].type === "broadcaster" ? "broadcaster" : data.badges[0].type === "moderator" ? "moderator" : "viewer"}" id="msg-${totalMessages}">
+            <div class="user-box ${actionClass}">${badges}${username}</div>
+            <div class="test-wrapper design-case">
+                <div class="message-case">
+                    <div class="user-message ${actionClass}">${message}</div>
+                </div>
+            </div>
+            <div class="test-tail tail"></div>
+            <div class="test-tail-shadow tail-shadow"></div>
+        </div>
+
+        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper {animationIn} animated ${data.badges[0].type === "broadcaster" ? "broadcaster" : data.badges[0].type === "moderator" ? "moderator" : "viewer"}" id="msg-${totalMessages}">
+            <div class="user-box ${actionClass}">${badges}${username}</div>
+            <div class="test-wrapper design-case">
+                <div class="message-case">
+                    <div class="user-message ${actionClass}">${message}</div>
+                </div>
+            </div>
+            <div class="test-tail tail"></div>
+            <div class="test-tail-shadow tail-shadow"></div>
+        </div>
+
+        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper message-row {animationIn} animated ${data.badges[0].type === "broadcaster" ? "broadcaster" : data.badges[0].type === "moderator" ? "moderator" : "viewer"}" id="msg-${totalMessages}">
+            <div class="user-box ${actionClass}">${badges}${username}</div>
+            <div class="design-case">
+                <div class="message-case">
+                    <div class="user-message ${actionClass}">${message}</div>
+                </div>
+            </div>
+            <div class="tail"></div>
+            <div class="tail-shadow"></div>
         </div>
     </div>
 </body>

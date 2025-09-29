@@ -330,8 +330,12 @@ function addMessage(username = '', badges = '', message, isAction = '', data, is
 
     if(isEvent) {
         element = $.parseHTML(/*html*/`
-        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="event message-row {animationIn} animated" id="msg-${totalMessages}">
-            <div class="event-message ${data.type}">${message}</div>
+        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper event message-row {animationIn} animated" id="msg-${totalMessages}">
+            <div class="design-case-event">
+                <div class="event-case">
+                    <div class="event-message" ${data.type}>${message}</div>
+                </div>
+            </div>
         </div>`);
     }else{
         if (isAction) {
@@ -347,11 +351,34 @@ function addMessage(username = '', badges = '', message, isAction = '', data, is
             return;
         }
 
+        // element = $.parseHTML(/*html*/`
+        // <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="message-row {animationIn} animated ${data.badges[0].type === "broadcaster" ? "broadcaster" : data.badges[0].type === "moderator" ? "moderator" : "viewer"}" id="msg-${totalMessages}">
+        //     <div class="user-box ${actionClass}">${badges}${username}</div>
+        //     <div class="user-message ${actionClass}">${message}</div>
+        // </div>`);
+        
         element = $.parseHTML(/*html*/`
-        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="message-row {animationIn} animated ${data.badges[0].type === "broadcaster" ? "broadcaster" : data.badges[0].type === "moderator" ? "moderator" : "viewer"}" id="msg-${totalMessages}">
+        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper message-row {animationIn} animated ${data.badges[0].type === "broadcaster" ? "broadcaster" : data.badges[0].type === "moderator" ? "moderator" : "viewer"}" id="msg-${totalMessages}">
             <div class="user-box ${actionClass}">${badges}${username}</div>
-            <div class="user-message ${actionClass}">${message}</div>
+            <div class="design-case">
+                <div class="message-case">
+                    <div class="user-message ${actionClass}">${message}</div>
+                </div>
+            </div>
+            <div class="tail"></div>
+            <div class="tail-shadow"></div>
         </div>`);
+
+        // <div class="test-wrapper-wrapper">
+        //     <div class="test-username">S-Name</div>
+        //     <div class="test-wrapper">
+        //         <div class="test-message-row">
+        //             <div class="test-message">Sed blandit velit ac dui convallis, eget consequat lectus interdum.</div>
+        //         </div>
+        //     </div>
+        //     <div class="test-tail"></div>
+        //     <div class="test-tail-shadow"></div>
+        // </div>
     }
 
     if (addition === "append") {
