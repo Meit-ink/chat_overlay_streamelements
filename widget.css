@@ -1,4 +1,4 @@
-/*Import you font from Google Fonts*/
+/*Import your font from Google Fonts*/
 /* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 :root{
@@ -11,8 +11,6 @@
     --chat-color-light: rgb(106, 233, 180);
     --white: #fff;
     --black: #000;
-
-
 }
 
 body,html{
@@ -28,83 +26,35 @@ body{
     font-style: normal;
 }
 
-/* .main-container{
-
-} */
-
-/* .user-box{
-
-} */
-
-/* .user-message{
-
-} */
-
-/* .event{
-
-} */
-
-/* .event-message{
-
-} */
-
 .badge{
     width: 18px;
     height: auto;
 }
 
-/* .broadcaster{
-    background-color: rgb(211, 174, 107);
-} */
-
-/* .viewer{
-    background-color: rgb(154, 208, 252);
-} */
-
-/* .moderator{
-    background-color: rgb(87, 211, 153);
-} */
-
-/* .user-message{
-    height: auto;
-    width: 100%;
-    padding: 10px;
-    position: relative;
-    font-size: 20px;
-    color: white;
-    background-color: black;
-} */
-
-/* .user-message:before{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 20px;
-    height: 40px;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 2;
-} */
-
-/* .test-container{ */
 .main-container{
-    padding-top: 20px;
-    width: 400px;
+    padding-top: 50px;
+    padding-left: 30px;
+    padding-right: 30px;
+    width: 480px;
     height: 600px;
-    /* background-color: red; */
 }
 
-/* .test-message-row{ */
 .message-case{
     position: relative;
     background-color: var(--chat-color-dark);
     color: #fff;
     font-size: 1.1em;
     z-index: 10;
+}
+
+.broadcaster > .design-case > .message-case{
+    clip-path: polygon(100% 5%, 0 0, 5% 100%, 97% 100%);
+}
+
+.viewer > .design-case > .message-case, .moderator > .design-case > .message-case{
     clip-path: polygon(0 5%, 100% 0, 95% 100%, 3% 100%);
 }
 
-/* .test-wrapper-wrapper{ */
 .design-case-wrapper{
     position: relative;
     max-width: 400px;
@@ -116,11 +66,9 @@ body{
     z-index: 5;
 }
 
-/* .test-tail{ */
 .tail{
     position: absolute;
     bottom: -5px;
-    left: -30px;
     width: 50px;
     height: 50px;
     background-color: var(--chat-color-dark);
@@ -128,25 +76,41 @@ body{
     z-index: 6;
 }
 
-/* .test-tail-shadow{ */
+.broadcaster > .tail{
+    left: auto;
+    right: -30px;
+    transform: scaleX(-1);
+}
+
+.moderator > .tail, .viewer > .tail{
+    left: -30px;
+}
+
 .tail-shadow{
     position: absolute;
     bottom: -5px;
-    left: -30px;
     width: 50px;
     height: 50px;
     background-color: var(--chat-color-light);
     clip-path: polygon(0 100%, 25% 74%, 0% 40%, 100% 0, 100% 50%, 63% 60%, 73% 90%);
     z-index: -1;
 }
-
-/* .test-message{ */
-.user-message, .event-message{
-    line-height: 1.4;
-    padding: 1em 1.5em 1em 2em;
+.broadcaster > .tail-shadow{
+    left: auto;
+    right: -30px;
+    transform: scaleX(-1);
 }
 
-/* .test-wrapper{ */
+.moderator > .tail-shadow, .viewer > .tail-shadow{
+    left: -30px;
+}
+
+.user-message, .event-message{
+    line-height: 1.4;
+    text-align: justify;
+    padding: 1.1em 1.5em 1em 2em;
+}
+
 .design-case{
     position: relative;
     background-color:var(--chat-color-light);
@@ -154,12 +118,19 @@ body{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    clip-path: polygon(0 5%, 100% 0, 95% 100%, 3% 100%);
-    padding: 0.5em 1em 0.3em 0.4em;
     z-index: 1
 }
 
-/* .test-username{ */
+.broadcaster .design-case{
+    clip-path: polygon(100% 5%, 0 0, 5% 100%, 97% 100%);
+    padding: 0.5em 0.3em 0.3em 1em;
+}
+
+.moderator .design-case, .viewer .design-case{
+    clip-path: polygon(0 5%, 100% 0, 95% 100%, 3% 100%);
+    padding: 0.5em 1em 0.3em 0.4em;
+}
+
 .user-box{
     position: absolute;
     z-index: 100;
@@ -167,10 +138,20 @@ body{
     background-color: var(--chat-color-deep-dark);
     padding: 0.2em 0.5em 0.3em 0.6em;
     top: -5px;
-    left: 15px;
-    clip-path: polygon(0 5%, 100% 0, 97% 100%, 3% 100%);
-    transform: rotate(-2deg);
     font-weight: bold;
+}
+
+.broadcaster > .user-box{
+    left: auto;
+    right: 15px;
+    transform: rotate(2deg);
+    clip-path: polygon(100% 5%, 0 0, 3% 100%, 97% 100%);
+}
+
+.moderator > .user-box, .viewer > .user-box{
+    left: 15px;
+    transform: rotate(-2deg);
+    clip-path: polygon(0 5%, 100% 0, 97% 100%, 3% 100%);
 }
 
 .event-message{
@@ -185,7 +166,6 @@ body{
     z-index: 1
 }
 
-/* .test-event-row{ */
 .event-case{
     position: relative;
     background-color: var(--chat-color-dark);

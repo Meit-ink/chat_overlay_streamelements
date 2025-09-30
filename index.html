@@ -10,70 +10,9 @@
 <body>
     <div class="main-container"></div>
 
-    <!-- <div class="test-container">
-        <div class="test-wrapper-wrapper">
-            <div class="test-username">S-Name</div>
-            <div class="test-wrapper">
-                <div class="test-message-row">
-                    <div class="test-message">Sed blandit velit ac dui convallis, eget consequat lectus interdum.</div>
-                </div>
-            </div>
-            <div class="test-tail"></div>
-            <div class="test-tail-shadow"></div>
-        </div>
-        <div class="test-wrapper-wrapper">
-            <div class="test-username">Long-Pseudonyme</div>
-            <div class="test-wrapper">
-                <div class="test-message-row">
-                    <div class="test-message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam laoreet, magna eu consectetur molestie, elit libero luctus quam, eu porta urna lorem sit amet turpis. Maecenas nec mi imperdiet, lacinia eros nec, aliquet ex.</div>
-                </div>
-            </div>
-            <div class="test-tail"></div>
-            <div class="test-tail-shadow"></div>
-        </div>
-        <div class="test-wrapper-wrapper">
-            <div class="test-username">Veryyyyy loooong-pseudonyme</div>
-            <div class="test-wrapper">
-                <div class="test-message-row">
-                    <div class="test-message">Fusce in diam eu leo dignissim auctor id vel neque. Vivamus semper, leo quis scelerisque hendrerit, dolor turpis accumsan nisl, non accumsan lectus sapien a libero. Proin sed sagittis ligula. Nulla at nisl massa. Duis magna nisi, vestibulum a lectus et, iaculis ullamcorper eros. Nam non auctor orci. Aenean in fermentum lectus, at scelerisque quam. Mauris at dignissim lectus, vestibulum gravida diam.</div>
-                </div>
-            </div>
-            <div class="test-tail"></div>
-            <div class="test-tail-shadow"></div>
-        </div>
-        <div class="test-wrapper-wrapper">
-            <div class="test-wrapper">
-                <div class="test-event-row">
-                    <div class="test-message test-event">Bidule_Machin vient tout juste de s'abonner !!</div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <div class="main-container">
-        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper {animationIn} animated ${data.badges[0].type === "broadcaster" ? "broadcaster" : data.badges[0].type === "moderator" ? "moderator" : "viewer"}" id="msg-${totalMessages}">
-            <div class="user-box ${actionClass}">${badges}${username}</div>
-            <div class="test-wrapper design-case">
-                <div class="message-case">
-                    <div class="user-message ${actionClass}">${message}</div>
-                </div>
-            </div>
-            <div class="test-tail tail"></div>
-            <div class="test-tail-shadow tail-shadow"></div>
-        </div>
-
-        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper {animationIn} animated ${data.badges[0].type === "broadcaster" ? "broadcaster" : data.badges[0].type === "moderator" ? "moderator" : "viewer"}" id="msg-${totalMessages}">
-            <div class="user-box ${actionClass}">${badges}${username}</div>
-            <div class="test-wrapper design-case">
-                <div class="message-case">
-                    <div class="user-message ${actionClass}">${message}</div>
-                </div>
-            </div>
-            <div class="test-tail tail"></div>
-            <div class="test-tail-shadow tail-shadow"></div>
-        </div>
-
-        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper message-row {animationIn} animated ${data.badges[0].type === "broadcaster" ? "broadcaster" : data.badges[0].type === "moderator" ? "moderator" : "viewer"}" id="msg-${totalMessages}">
-            <div class="user-box ${actionClass}">${badges}${username}</div>
+    <!-- <div class="main-container">
+        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper message-row {animationIn} animated broadcaster" id="msg-${totalMessages}">
+            <div class="user-box ${actionClass}">${badges}Broadcaster</div>
             <div class="design-case">
                 <div class="message-case">
                     <div class="user-message ${actionClass}">${message}</div>
@@ -82,6 +21,28 @@
             <div class="tail"></div>
             <div class="tail-shadow"></div>
         </div>
-    </div>
+
+        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper message-row {animationIn} animated viewer" id="msg-${totalMessages}">
+            <div class="user-box ${actionClass}">${badges}Viewer</div>
+            <div class="design-case">
+                <div class="message-case">
+                    <div class="user-message ${actionClass}">${message}</div>
+                </div>
+            </div>
+            <div class="tail"></div>
+            <div class="tail-shadow"></div>
+        </div>
+
+        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper message-row {animationIn} animated moderator" id="msg-${totalMessages}">
+            <div class="user-box ${actionClass}">${badges}Moderator</div>
+            <div class="design-case">
+                <div class="message-case">
+                    <div class="user-message ${actionClass}">${message}</div>
+                </div>
+            </div>
+            <div class="tail"></div>
+            <div class="tail-shadow"></div>
+        </div>
+    </div> -->
 </body>
 </html>
