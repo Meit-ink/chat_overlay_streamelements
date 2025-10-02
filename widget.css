@@ -32,10 +32,11 @@ body{
 }
 
 .main-container{
-    padding-top: 50px;
-    padding-left: 30px;
-    padding-right: 30px;
-    width: 480px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    /* padding-top: 10px; */
+    width: 420px;
     height: 600px;
 }
 
@@ -44,6 +45,7 @@ body{
     background-color: var(--chat-color-dark);
     color: #fff;
     font-size: 1.1em;
+    word-wrap: break-word;
     z-index: 10;
 }
 
@@ -59,11 +61,19 @@ body{
     position: relative;
     max-width: 400px;
     height: auto;
+    /* margin-top: 10px; */
+    margin-bottom: 10px;
+    z-index: 5;
+}
+
+.broadcaster{
+    margin-left: 20px;
+    margin-right: 40px;
+}
+
+.moderator, .viewer{
     margin-left: 40px;
     margin-right: 20px;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    z-index: 5;
 }
 
 .tail{

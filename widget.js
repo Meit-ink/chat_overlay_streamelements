@@ -350,12 +350,6 @@ function addMessage(username = '', badges = '', message, isAction = '', data, is
             lastMessage.querySelector('.user-message').appendChild(messageElement);
             return;
         }
-
-        // element = $.parseHTML(/*html*/`
-        // <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="message-row {animationIn} animated ${data.badges[0].type === "broadcaster" ? "broadcaster" : data.badges[0].type === "moderator" ? "moderator" : "viewer"}" id="msg-${totalMessages}">
-        //     <div class="user-box ${actionClass}">${badges}${username}</div>
-        //     <div class="user-message ${actionClass}">${message}</div>
-        // </div>`);
         
         element = $.parseHTML(/*html*/`
         <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper message-row {animationIn} animated ${data.badges[0].type === "broadcaster" ? "broadcaster" : data.badges[0].type === "moderator" ? "moderator" : "viewer"}" id="msg-${totalMessages}">
@@ -368,17 +362,6 @@ function addMessage(username = '', badges = '', message, isAction = '', data, is
             <div class="tail"></div>
             <div class="tail-shadow"></div>
         </div>`);
-
-        // <div class="test-wrapper-wrapper">
-        //     <div class="test-username">S-Name</div>
-        //     <div class="test-wrapper">
-        //         <div class="test-message-row">
-        //             <div class="test-message">Sed blandit velit ac dui convallis, eget consequat lectus interdum.</div>
-        //         </div>
-        //     </div>
-        //     <div class="test-tail"></div>
-        //     <div class="test-tail-shadow"></div>
-        // </div>
     }
 
     if (addition === "append") {
@@ -390,6 +373,7 @@ function addMessage(username = '', badges = '', message, isAction = '', data, is
             });
         } else {
             $(element).appendTo('.main-container');
+            console.log(getMessageTotalHeight());
         }
     } else {
         if (hideAfter !== 999) {
@@ -403,31 +387,41 @@ function addMessage(username = '', badges = '', message, isAction = '', data, is
         }
     }
 
-    if (totalMessages > messagesLimit) {
+    if (totalMessages > messagesLimit || getMessageTotalHeight() > $('.main-container').height()) {
         removeRow();
     }
 }
 
 function removeRow() {
-    if (!$(removeSelector).length) {
-        return;
-    }
-    if (animationOut !== "none" || !$(removeSelector).hasClass(animationOut)) {
-        if (hideAfter !== 999) {
-            $(removeSelector).dequeue();
-        } else {
-            $(removeSelector).addClass(animationOut).delay(1000).queue(function () {
-                $(this).remove().dequeue()
-            });
-
+    if(getMessageTotalHeight() < $('.main-container').height()){
+        if (!$(removeSelector).length) {
+            return;
         }
-        return;
-    }
+        if (animationOut !== "none" || !$(removeSelector).hasClass(animationOut)) {
+            if (hideAfter !== 999) {
+                $(removeSelector).dequeue();
+            } else {
+                $(removeSelector).addClass(animationOut).delay(1000).queue(function () {
+                    $(this).remove().dequeue()
+                });
 
+            }
+            return;
+        }
+    }
+    
     $(removeSelector).animate({
         height: 0,
         opacity: 0
     }, 'slow', function () {
         $(removeSelector).remove();
     });
+}
+
+function getMessageTotalHeight() {
+    let totalHeight = 0;
+    $('.message-row').each(function () {
+        totalHeight += $(this).outerHeight(true);
+    });
+    return totalHeight;
 }
