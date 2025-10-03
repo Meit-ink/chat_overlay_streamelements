@@ -386,7 +386,6 @@ function addMessage(username = '', badges = '', message, isAction = '', data, is
             });
         } else {
             $(element).appendTo('.main-container');
-            console.log(getMessageTotalHeight());
         }
     } else {
         if (hideAfter !== 999) {
@@ -400,7 +399,7 @@ function addMessage(username = '', badges = '', message, isAction = '', data, is
         }
     }
 
-    if (totalMessages > messagesLimit || getMessageTotalHeight() > $('.main-container').height()) {
+    if (totalMessages > messagesLimit) {
         removeRow();
     }
 }
