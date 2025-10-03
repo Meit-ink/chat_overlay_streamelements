@@ -20,4 +20,5 @@ Working on a chat that can be use on StreamElements. The code is based on the or
 
 ## Notes:
 - You can't upload images with StreamElements so keep in mind you have to host them
-- As an alternative you can use .svg
+- As an alternative you can use .svg for shapes and backgrounds
+- /!\ Be careful as the .svg need to be edited to be use with the CSS (replace all " by ' and # by %23) and take a lot of space so be mindful and think about minimizing them.

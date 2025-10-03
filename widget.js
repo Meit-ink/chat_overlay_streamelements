@@ -32,8 +32,8 @@ window.addEventListener('onEventReceived', function (obj) {
     const listener = obj.detail.listener;
     const event = obj.detail.event;
 
-    // If the event is a widget button click, we can emulate a message event
-    // This is useful for testing purposes, you can remove this part if you don't need it
+    // This part is used to test the chat overlay with a button in the widget preview
+    // You can remove it if you don't need it or if you are not using StreamElements but I recommend keeping it for testing purposes
     if (obj.detail.event.listener === 'widget-button') {
         if (obj.detail.event.field === 'testMessage') {
             let emulated = new CustomEvent("onEventReceived", {
@@ -101,10 +101,10 @@ window.addEventListener('onEventReceived', function (obj) {
         return;
     }
 
-    //EVENTS
+    // EVENTS
     // If the listener is not in the active events, we can ignore it
     if(!activeEvents.has(listener)) return;
-    // Get all important data from the event to define the message
+    // Get all important data from the event to define the message structure
     let eventData = {
         msgId: listener + "-" + Date.now(),
         userId: event._id,
@@ -114,9 +114,9 @@ window.addEventListener('onEventReceived', function (obj) {
     let isEvent = false;
 
     // The switch case is used to define the type of event and add the necessary data
-    //You can add more cases if you want to support more events
-    //If you want to remove an event, just remove the case or change the isActive property to false in the eventList
-    //You can also personalize the event messages displayed in the chat by changing the message variable
+    // You can add more cases if you want to support more events
+    // If you want to remove an event, just remove the case or change the isActive property to false in the eventList
+    // You can also personalize the event messages displayed in the chat by changing the message variable
     switch (listener) {
         case "message":
             let data = event.data;
@@ -328,6 +328,7 @@ function addMessage(username = '', badges = '', message, isAction = '', data, is
     let element;
     let actionClass = "";
 
+    // If the message is an event, it will use this structure
     if(isEvent) {
         element = $.parseHTML(/*html*/`
         <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper event message-row {animationIn} animated" id="msg-${totalMessages}">
@@ -341,6 +342,9 @@ function addMessage(username = '', badges = '', message, isAction = '', data, is
         if (isAction) {
             actionClass = "action";
         }
+        // If the message is from the same user as the previous one and mergeMessages is enabled, it will merge the messages
+        // I do not recommend using this feature as it can cause issues with some animations and message deletions
+        // Only use it if you know what you are doing
         if (mergeMessages && previousSender === data.userId) {
             const lastMessage = document.querySelector('.main-container').lastElementChild;
             const messageElement = document.createElement('span');
@@ -351,6 +355,15 @@ function addMessage(username = '', badges = '', message, isAction = '', data, is
             return;
         }
         
+        // If the message is a normal chat message, it will use this structure
+        // I recommend you to customize the structure to fit your design needs
+        // /!\ Make sure to keep the classes and data attributes for the script to work properly /!\
+        // Classes and data attributes to keep:
+        // - message-row => used to identify the message rows for removal when the limit is reached. It's a crucial class, do not remove it.
+        // - animated => used for the animation effects. You can change it if you want, but make sure to update the CSS accordingly.
+        // - data-sender => used to identify the sender of the message for merging and deletion. It's a crucial data attribute, do not remove it.
+        // - data-msgid => used to identify the message for deletion. It's a crucial data attribute, do not remove it.
+        // - id="msg-${totalMessages}" => used to give a unique ID to each message. You can change the format if you want, but make sure to keep it unique.
         element = $.parseHTML(/*html*/`
         <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper message-row {animationIn} animated ${data.badges[0].type === "broadcaster" ? "broadcaster" : data.badges[0].type === "moderator" ? "moderator" : "viewer"}" id="msg-${totalMessages}">
             <div class="user-box ${actionClass}">${badges}${username}</div>
@@ -393,21 +406,19 @@ function addMessage(username = '', badges = '', message, isAction = '', data, is
 }
 
 function removeRow() {
-    if(getMessageTotalHeight() < $('.main-container').height()){
-        if (!$(removeSelector).length) {
-            return;
-        }
-        if (animationOut !== "none" || !$(removeSelector).hasClass(animationOut)) {
-            if (hideAfter !== 999) {
-                $(removeSelector).dequeue();
-            } else {
-                $(removeSelector).addClass(animationOut).delay(1000).queue(function () {
-                    $(this).remove().dequeue()
-                });
+    if (!$(removeSelector).length) {
+        return;
+    }
+    if (animationOut !== "none" || !$(removeSelector).hasClass(animationOut)) {
+        if (hideAfter !== 999) {
+            $(removeSelector).dequeue();
+        } else {
+            $(removeSelector).addClass(animationOut).delay(1000).queue(function () {
+                $(this).remove().dequeue()
+            });
 
-            }
-            return;
         }
+        return;
     }
     
     $(removeSelector).animate({
@@ -418,10 +429,14 @@ function removeRow() {
     });
 }
 
-function getMessageTotalHeight() {
-    let totalHeight = 0;
-    $('.message-row').each(function () {
-        totalHeight += $(this).outerHeight(true);
-    });
-    return totalHeight;
-}
+// This function is used to get the total height of all messages in the chat
+// It is used to determine if we need to remove old messages when the total height exceeds the container height
+// It is not use for now, but it can be useful in the future if you want to implement a feature that limits the chat by height instead of number of messages
+// A workaround has been found in CSS using overflow-y and flex.
+// function getMessageTotalHeight() {
+//     let totalHeight = 0;
+//     $('.message-row').each(function () {
+//         totalHeight += $(this).outerHeight(true);
+//     });
+//     return totalHeight;
+// }
