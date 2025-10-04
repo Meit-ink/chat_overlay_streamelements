@@ -2,18 +2,23 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 :root{
-    --broadcaster-color: rgb(211, 174, 107);
-    --viewer-color: rgb(154, 208, 252);
-    --moderator-color: rgb(87, 211, 153);
-    --event-color: rgb(52, 136, 161);
-
-    --base-color: rgb(117, 255, 197);
-    --chat-primary-color: hsl( from var(--base-color) h s calc(l - 15));
-    --chat-secondary-color: hsl( from var(--base-color) h s calc(l - 37));
+    /*Custom your colors here*/
+    /* By modifing the base color you can have a variant for you primary and secondary color, just be sure to have a base color light enough to have a nice contrast in your chat */
+    /* You can also directly modify the primary and secondary color if you want */
+    --base-color: rgb(255, 130, 130);
+    --chat-primary-color: hsl( from var(--base-color) h s calc(l - 8));
+    --chat-secondary-color: hsl( from var(--base-color) h s calc(l - 26) / 0.8);
     --base-darker: hsl( from var(--base-color) h s calc(l - 70));
 
+    /* You can also modify the color for each type of user and event */
+    /* --broadcaster-color: rgb(211, 174, 107); */
+    /* --viewer-color: rgb(154, 208, 252); */
+    /* --moderator-color: rgb(87, 211, 153); */
+    --event-color: rgb(52, 136, 161);
+
     --white: #fff;
-    --black: #000;}
+    --black: #000;
+}
 
 body,html{
     margin: 0;
@@ -31,6 +36,8 @@ body{
 .badge{
     width: 18px;
     height: auto;
+    /* align-self: center; */
+    vertical-align: middle;
 }
 
 .main-container{
