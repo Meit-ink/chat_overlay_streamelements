@@ -1,13 +1,12 @@
 /*Import your font from Google Fonts*/
-/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 :root{
     /*Custom your colors here*/
     /* By modifing the base color you can have a variant for you primary and secondary color, just be sure to have a base color light enough to have a nice contrast in your chat */
     /* You can also directly modify the primary and secondary color if you want */
-    --base-color: rgb(255, 130, 130);
+    --base-color: rgb(148, 239, 255);
     --chat-primary-color: hsl( from var(--base-color) h s calc(l - 8));
-    --chat-secondary-color: hsl( from var(--base-color) h s calc(l - 26) / 0.8);
+    --chat-secondary-color: hsl( from var(--base-color) h s calc(l - 46) / 0.8);
     --base-darker: hsl( from var(--base-color) h s calc(l - 70));
 
     /* You can also modify the color for each type of user and event */
@@ -27,7 +26,6 @@ body,html{
 }
 
 body{
-    /* font-family: 'Roboto', sans-serif; */
     font-family: "Patrick Hand", cursive;
     font-weight: 400;
     font-style: normal;
@@ -36,9 +34,19 @@ body{
 .badge{
     width: 18px;
     height: auto;
-    /* align-self: center; */
     vertical-align: middle;
 }
+
+.broadcaster{
+    margin-left: 20px;
+    margin-right: 40px;
+}
+
+.moderator, .viewer{
+    margin-left: 40px;
+    margin-right: 20px;
+}
+
 
 .main-container{
     display: flex;
@@ -48,6 +56,22 @@ body{
     height: 600px;
 }
 
+.design-case-wrapper{
+    position: relative;
+    max-width: 400px;
+    height: auto;
+    margin-bottom: 10px;
+    z-index: 5;
+}
+
+.user-message, .event-message{
+    line-height: 1.4;
+    text-align: justify;
+    padding: 0.9em 1.5em 0.3em 1.5em;
+}
+
+
+/* MESSAGE-CASE */
 .message-case{
     position: relative;
     background-color: var(--chat-secondary-color);
@@ -65,24 +89,7 @@ body{
     clip-path: polygon(0 5%, 100% 0, 95% 100%, 3% 100%);
 }
 
-.design-case-wrapper{
-    position: relative;
-    max-width: 400px;
-    height: auto;
-    margin-bottom: 10px;
-    z-index: 5;
-}
-
-.broadcaster{
-    margin-left: 20px;
-    margin-right: 40px;
-}
-
-.moderator, .viewer{
-    margin-left: 40px;
-    margin-right: 20px;
-}
-
+/* TAIL */
 .tail{
     position: absolute;
     bottom: -5px;
@@ -91,6 +98,7 @@ body{
     background-color: var(--chat-secondary-color);
     clip-path: polygon(0 100%, 42% 74%, 14% 46%, 100% 0, 100% 42%, 50% 56%, 67% 82%);
     z-index: 6;
+    filter: blur(12px);
 }
 
 .broadcaster > .tail{
@@ -112,6 +120,7 @@ body{
     clip-path: polygon(0 100%, 25% 74%, 0% 40%, 100% 0, 100% 50%, 63% 60%, 73% 90%);
     z-index: -1;
 }
+
 .broadcaster > .tail-shadow{
     left: auto;
     right: -30px;
@@ -122,12 +131,7 @@ body{
     left: -30px;
 }
 
-.user-message, .event-message{
-    line-height: 1.4;
-    text-align: justify;
-    padding: 1.1em 1.5em 1em 2em;
-}
-
+/* DESIGN-CASE */
 .design-case{
     position: relative;
     background-color:var(--chat-primary-color);
@@ -148,6 +152,7 @@ body{
     padding: 0.5em 1em 0.3em 0.4em;
 }
 
+/* USER-BOX */
 .user-box{
     position: absolute;
     z-index: 100;
@@ -171,6 +176,7 @@ body{
     clip-path: polygon(0 5%, 100% 0, 97% 100%, 3% 100%);
 }
 
+/* EVENT */
 .event-message{
     text-align: center;
 }

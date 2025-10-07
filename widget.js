@@ -365,7 +365,7 @@ function addMessage(username = '', badges = '', message, isAction = '', data, is
         // - data-msgid => used to identify the message for deletion. It's a crucial data attribute, do not remove it.
         // - id="msg-${totalMessages}" => used to give a unique ID to each message. You can change the format if you want, but make sure to keep it unique.
         element = $.parseHTML(/*html*/`
-        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper message-row {animationIn} animated ${data.badges[0].type === "broadcaster" ? "broadcaster" : data.badges[0].type === "moderator" ? "moderator" : "viewer"}" id="msg-${totalMessages}">
+        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper message-row {animationIn} animated ${data.badges.length === 0 ? "viewer" : data.badges[0].type === "broadcaster" ? "broadcaster" : data.badges[0].type === "moderator" ? "moderator" : "viewer"}" id="msg-${totalMessages}">
             <div class="user-box ${actionClass}">${badges}${username}</div>
             <div class="design-case">
                 <div class="message-case">
