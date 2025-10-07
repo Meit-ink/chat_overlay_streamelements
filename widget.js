@@ -8,6 +8,7 @@ let ignoredUsers = [];
 let previousSender = "";
 let mergeMessages = false;
 let visibleBadges = true;
+let displayAvatar = true;
 
 // You can personalize the events you want to show in the chat
 // The events that are not in the list or define as false for isActive will not be displayed in the chat
@@ -151,7 +152,7 @@ window.addEventListener('onEventReceived', function (obj) {
             break
         case "follower-latest":
             isEvent = true;
-            const followMessage = `✨ <b>${eventData.displayName}</b> vient de follow ! ✨`;
+            const followMessage = `⛺ <b>${eventData.displayName}</b> vient de planter sa tente ! ⛺`;
 
             addMessage('', '', followMessage, false, eventData, isEvent);
             break;
@@ -160,7 +161,7 @@ window.addEventListener('onEventReceived', function (obj) {
                 viewers: event.amount
             });
             isEvent = true;
-            const raidMessage = `🚨 <b>${eventData.displayName}</b> arrive avec un raid de ${eventData.viewers} viewers ! 🚨`;            
+            const raidMessage = `⚔️ <b>${eventData.displayName}</b> lance un assaut avec ${eventData.viewers} viewers ! ⚔️`;            
             
             addMessage('', '', raidMessage, false, eventData, isEvent);
             break;
@@ -174,9 +175,9 @@ window.addEventListener('onEventReceived', function (obj) {
             let subtext = "";
 
             if(event.gifted === true){
-                subtext += `🎉 <b>${eventData.displayName}</b> a reçu un abonnement cadeau ! 🎉`;
+                subtext += `🎉 <b>${eventData.displayName}</b> a reçu une offrande ! 🎉`;
             }else if(eventData.bulkGifted === true){
-                subtext += `🎉 <b>${eventData.displayName}</b> a offert ${eventData.amount} abonnement(s) ! 🎉`;
+                subtext += `🎉 <b>${eventData.displayName}</b> a offert ${eventData.amount} offrandes ! 🎉`;
             }else{
                 subtext += `🎉 <b>${eventData.displayName}</b> s'est abonné(e) ! 🎉`;
             }
@@ -323,10 +324,11 @@ function html_encode(e) {
 }
 
 // This function is used to add a message or an event to the chat
-function addMessage(username = '', badges = '', message, isAction = '', data, isEvent) {
+async function addMessage(username = '', badges = '', message, isAction = '', data, isEvent) {
     totalMessages += 1;
     let element;
     let actionClass = "";
+    let userAvatar = "";
 
     // If the message is an event, it will use this structure
     if(isEvent) {
@@ -364,6 +366,17 @@ function addMessage(username = '', badges = '', message, isAction = '', data, is
         // - data-sender => used to identify the sender of the message for merging and deletion. It's a crucial data attribute, do not remove it.
         // - data-msgid => used to identify the message for deletion. It's a crucial data attribute, do not remove it.
         // - id="msg-${totalMessages}" => used to give a unique ID to each message. You can change the format if you want, but make sure to keep it unique.
+        
+        // getUserAvatar(data.displayName).then(avatar => {
+        //     userAvatar = avatar;
+        //     console.log(userAvatar);
+        // })
+
+        if(displayAvatar === true){
+            // Await the avatar URL before creating the message element
+            // This ensures the avatar is loaded correctly
+            userAvatar = await getUserAvatar(data.displayName);
+        }
         element = $.parseHTML(/*html*/`
         <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper message-row {animationIn} animated ${data.badges.length === 0 ? "viewer" : data.badges[0].type === "broadcaster" ? "broadcaster" : data.badges[0].type === "moderator" ? "moderator" : "viewer"}" id="msg-${totalMessages}">
             <div class="user-box ${actionClass}">${badges}${username}</div>
@@ -374,6 +387,7 @@ function addMessage(username = '', badges = '', message, isAction = '', data, is
             </div>
             <div class="tail"></div>
             <div class="tail-shadow"></div>
+            ${userAvatar ? `<img class="user-avatar" src="${userAvatar}" onerror="this.style.display='none'">` : ''}
         </div>`);
     }
 
@@ -439,3 +453,11 @@ function removeRow() {
 //     });
 //     return totalHeight;
 // }
+
+// This function is used to get the user avatar from decapi.me
+// It is an async function that returns a promise
+async function getUserAvatar(username) {
+    const response = await fetch('https://decapi.me/twitch/avatar/' + username);
+    const avatarUrl = await response.text();
+    return avatarUrl.trim();
+}

@@ -70,6 +70,15 @@ body{
     padding: 0.9em 1.5em 0.3em 1.5em;
 }
 
+.user-avatar{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    top: -10px;
+    object-fit: cover;
+    z-index: 15;
+}
 
 /* MESSAGE-CASE */
 .message-case{
