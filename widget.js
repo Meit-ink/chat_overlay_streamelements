@@ -12,6 +12,7 @@ let displayAvatar = true;
 
 // You can personalize the events you want to show in the chat
 // The events that are not in the list or define as false for isActive will not be displayed in the chat
+// It is recommended to keep delete-message and delete-messages events to allow message moderation
 let eventList = [
     { libelle: "message", isActive: true },
     { libelle: "delete-message", isActive: true },
@@ -378,7 +379,7 @@ async function addMessage(username = '', badges = '', message, isAction = '', da
             userAvatar = await getUserAvatar(data.displayName);
         }
         element = $.parseHTML(/*html*/`
-        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper message-row {animationIn} animated ${data.badges.length === 0 ? "viewer" : data.badges[0].type === "broadcaster" ? "broadcaster" : data.badges[0].type === "moderator" ? "moderator" : "viewer"}" id="msg-${totalMessages}">
+        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper message-row {animationIn} animated ${data.badges.length === 0 ? "viewer" : data.badges[0].type === "broadcaster" ? "broadcaster" : data.badges[0].type === "moderator" ? "moderator" : "viewer"} ${displayAvatar === true ? 'avatar-on' : ''}" id="msg-${totalMessages}">
             <div class="user-box ${actionClass}">${badges}${username}</div>
             <div class="design-case">
                 <div class="message-case">

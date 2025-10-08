@@ -8,12 +8,12 @@
     <script src="widget.js" defer></script>
 </head>
 <body>
-    <div class="main-container"></div>
+    <!-- <div class="main-container"></div> -->
 
     <!-- Example message structures for testing purposes -->
     <!-- Delete if needed-->
     <div class="main-container">
-        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper message-row {animationIn} animated broadcaster" id="msg-${totalMessages}">
+        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper message-row {animationIn} animated broadcaster avatar-on" id="msg-${totalMessages}">
             <div class="user-box ${actionClass}">${badges}Broadcaster</div>
             <div class="design-case">
                 <div class="message-case">
@@ -22,9 +22,10 @@
             </div>
             <div class="tail"></div>
             <div class="tail-shadow"></div>
+            <div class="user-avatar"></div>
         </div>
 
-        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper message-row {animationIn} animated viewer" id="msg-${totalMessages}">
+        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper message-row {animationIn} animated viewer avatar-on" id="msg-${totalMessages}">
             <div class="user-box ${actionClass}">${badges}Viewer</div>
             <div class="design-case">
                 <div class="message-case">
@@ -33,17 +34,21 @@
             </div>
             <div class="tail"></div>
             <div class="tail-shadow"></div>
+            <div class="user-avatar"></div>
         </div>
 
-        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper message-row {animationIn} animated moderator" id="msg-${totalMessages}">
+        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper message-row {animationIn} animated moderator avatar-on" id="msg-${totalMessages}">
             <div class="user-box ${actionClass}">${badges}Moderator</div>
             <div class="design-case">
                 <div class="message-case">
-                    <div class="user-message ${actionClass}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed euismod erat. Donec sodales enim et purus pharetra, at egestas eros consequat. Aliquam elementum mauris quis aliquam porta. In tristique justo non elementum molestie. Fusce sollicitudin dui non nunc blandit, nec dignissim turpis tincidunt. Vivamus dignissim, libero faucibus iaculis maximus, massa lectus sodales massa, quis mollis nulla tortor non erat. Vestibulum vehicula lobortis est eget malesuada.</div>
+                    <div class="user-message ${actionClass}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed euismod erat.</div>
+                    <!-- <div class="user-message ${actionClass}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed euismod erat. Donec sodales enim et purus pharetra, at egestas eros consequat. Aliquam elementum mauris quis aliquam porta. In tristique justo non elementum molestie. Fusce sollicitudin dui non nunc blandit, nec dignissim turpis tincidunt. Vivamus dignissim, libero faucibus iaculis maximus, massa lectus sodales massa, quis mollis nulla tortor non erat. Vestibulum vehicula lobortis est eget malesuada.</div> -->
                 </div>
             </div>
             <div class="tail"></div>
             <div class="tail-shadow"></div>
+            <!-- ${userAvatar ? `<img class="user-avatar" src="${userAvatar}" onerror="this.style.display='none'">` : ''} -->
+            <div class="user-avatar"></div>
         </div>
     </div>
 </body>
