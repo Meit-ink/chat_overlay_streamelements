@@ -1,3 +1,4 @@
+const container = document.querySelector('.main-container');
 let totalMessages = 0, messagesLimit = 0, nickColor = "user", removeSelector, addition, customNickColor, channelName,
     provider;
 let animationIn = 'bounceIn';
@@ -29,6 +30,8 @@ let eventList = [
 let activeEvents = new Set(
     eventList.filter(event => event.isActive).map(event => event.libelle)
 );
+
+displayAvatar === true ? container.classList.add('avatar-on') : container.classList.remove('avatar-on');
 
 window.addEventListener('onEventReceived', function (obj) {
     const listener = obj.detail.listener;
@@ -334,7 +337,7 @@ async function addMessage(username = '', badges = '', message, isAction = '', da
     // If the message is an event, it will use this structure
     if(isEvent) {
         element = $.parseHTML(/*html*/`
-        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper event message-row {animationIn} animated" id="msg-${totalMessages}">
+        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="event message-row {animationIn} animated" id="msg-${totalMessages}">
             <div class="design-case-event">
                 <div class="event-case">
                     <div class="event-message" ${data.type}>${message}</div>
@@ -368,18 +371,13 @@ async function addMessage(username = '', badges = '', message, isAction = '', da
         // - data-msgid => used to identify the message for deletion. It's a crucial data attribute, do not remove it.
         // - id="msg-${totalMessages}" => used to give a unique ID to each message. You can change the format if you want, but make sure to keep it unique.
         
-        // getUserAvatar(data.displayName).then(avatar => {
-        //     userAvatar = avatar;
-        //     console.log(userAvatar);
-        // })
-
         if(displayAvatar === true){
             // Await the avatar URL before creating the message element
             // This ensures the avatar is loaded correctly
             userAvatar = await getUserAvatar(data.displayName);
         }
         element = $.parseHTML(/*html*/`
-        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper message-row {animationIn} animated ${data.badges.length === 0 ? "viewer" : data.badges[0].type === "broadcaster" ? "broadcaster" : data.badges[0].type === "moderator" ? "moderator" : "viewer"} ${displayAvatar === true ? 'avatar-on' : ''}" id="msg-${totalMessages}">
+        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="message-row {animationIn} animated ${data.badges.length === 0 ? "viewer" : data.badges[0].type === "broadcaster" ? "broadcaster" : data.badges[0].type === "moderator" ? "moderator" : "viewer"} ${displayAvatar === true ? 'avatar-on' : ''}" id="msg-${totalMessages}">
             <div class="user-box ${actionClass}">${badges}${username}</div>
             <div class="design-case">
                 <div class="message-case">
@@ -388,7 +386,7 @@ async function addMessage(username = '', badges = '', message, isAction = '', da
             </div>
             <div class="tail"></div>
             <div class="tail-shadow"></div>
-            ${userAvatar ? `<img class="user-avatar" src="${userAvatar}" onerror="this.style.display='none'">` : ''}
+            ${userAvatar ? `<img class="user-avatar" src="${userAvatar}" onerror="this.style.display='none'"><div class="avatar-shadow"></div>` : ''}
         </div>`);
     }
 

@@ -13,7 +13,7 @@
     <!-- Example message structures for testing purposes -->
     <!-- Delete if needed-->
     <div class="main-container">
-        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper message-row {animationIn} animated broadcaster avatar-on" id="msg-${totalMessages}">
+        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="message-row {animationIn} animated broadcaster avatar-on" id="msg-${totalMessages}">
             <div class="user-box ${actionClass}">${badges}Broadcaster</div>
             <div class="design-case">
                 <div class="message-case">
@@ -23,9 +23,10 @@
             <div class="tail"></div>
             <div class="tail-shadow"></div>
             <div class="user-avatar"></div>
+            <div class="avatar-shadow"></div>
         </div>
 
-        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper message-row {animationIn} animated viewer avatar-on" id="msg-${totalMessages}">
+        <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="message-row {animationIn} animated viewer avatar-on" id="msg-${totalMessages}">
             <div class="user-box ${actionClass}">${badges}Viewer</div>
             <div class="design-case">
                 <div class="message-case">
@@ -35,6 +36,7 @@
             <div class="tail"></div>
             <div class="tail-shadow"></div>
             <div class="user-avatar"></div>
+            <div class="avatar-shadow"></div>
         </div>
 
         <div data-sender="${data.userId}" data-msgid="${data.msgId}" class="design-case-wrapper message-row {animationIn} animated moderator avatar-on" id="msg-${totalMessages}">
@@ -49,6 +51,7 @@
             <div class="tail-shadow"></div>
             <!-- ${userAvatar ? `<img class="user-avatar" src="${userAvatar}" onerror="this.style.display='none'">` : ''} -->
             <div class="user-avatar"></div>
+            <div class="avatar-shadow"></div>
         </div>
     </div>
 </body>
